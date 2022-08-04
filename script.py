@@ -63,34 +63,6 @@ def main():
     f.write(template.render(data))
 
 
-def test():
-  project = "tetrahdron"
-  module_name = "_tetrahdron"
-  source_files = "../../fortran/tetrahedron/fort_tetrahedron.f90;../../fortran/tetrahedron/fort_tetra_energy.f90"
-  prefix = "tet"
-  require_blas   = False
-  require_lapack = True
-  require_openmp = True
-
-  template = Template(
-      open("template/CMakeLists.txt", "r").read(),
-      trim_blocks=True,
-      lstrip_blocks=True,
-      )
-
-  data = {
-      "project": project,
-      "module_name": module_name,
-      "source_files": process_source_files(source_files),
-      "prefix": process_prefix(prefix),
-      "require_blas"   : require_blas,
-      "require_lapack" : require_lapack,
-      "require_openmp" : require_openmp,
-      }
-
-  print(template.render(data))
-
-
 if __name__ == '__main__':
   main()
 
