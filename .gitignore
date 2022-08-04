@@ -1,0 +1,3 @@
+*.pyc
+CMakeLists.txt
+.DS_Store

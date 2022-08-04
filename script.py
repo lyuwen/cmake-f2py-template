@@ -33,7 +33,6 @@ def main():
   require_lapack = input("Requires LAPACK (yN): ").strip()
   require_openmp = input("Requires OpenMP (yN): ").strip()
   is_f90         = is_f90.lower()         in ["y", "yes"]
-  print(f"{is_f90=}")
   require_blas   = require_blas.lower()   in ["y", "yes"]
   require_lapack = require_lapack.lower() in ["y", "yes"]
   require_openmp = require_openmp.lower() in ["y", "yes"]
@@ -55,7 +54,13 @@ def main():
       "require_openmp" : require_openmp,
       }
 
-  print(template.render(data))
+  file = "CMakeLists.txt"
+  if os.path.exists(file):
+    remove = input("CMakeLists.txt already exists, overwrite? (yN): ").strip()
+    if remove.lower() in ["n", "no"]:
+      return
+  with open(file, "w") as f:
+    f.write(template.render(data))
 
 
 def test():
